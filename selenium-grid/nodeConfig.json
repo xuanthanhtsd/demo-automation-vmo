@@ -1,0 +1,36 @@
+{
+  "capabilities":
+  [
+    {
+      "browserName": "chrome",
+      "marionette": true,
+      "maxInstances": 5,
+      "seleniumProtocol": "WebDriver",
+      "version": "84.0.4147.125",
+      "webdriver.chrome.driver": "C:/Windows/System32/chromedriver.exe"
+    },
+    {
+      "browserName": "firefox",
+      "marionette": true,
+      "maxInstances": 5,
+      "seleniumProtocol": "WebDriver",
+      "version": "79.0",
+      "webdriver.gecko.driver": "C:/Windows/System32/geckodriver.exe"
+    }
+  ],
+  "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+  "maxSession": 5,
+  "port": 5555,
+  "register": true,
+  "registerCycle": 5000,
+  "hub": "http://172.16.0.8:4444",
+  "nodeStatusCheckTimeout": 5000,
+  "nodePolling": 5000,
+  "role": "node",
+  "unregisterIfStillDownAfter": 60000,
+  "downPollingLimit": 2,
+  "debug": false,
+  "servlets" : [],
+  "withoutServlets": [],
+  "custom": {}
+}

@@ -1,0 +1,164 @@
+ubuntu@172.16.0.8
+vmo654321
+
+Docker Engine
+Docker compose
+
+Docker images
+private registry (local)
+Docker volume
+Docker container
+
+===
+
+ls -la -> list noi dung folder
+cat <ten file> -> xem noi dung file
+echo <VARIABLE> -> xem gia tri bien VARIABLE (vd ${USER}, $PWD
+
+===
+$ cd ~/java-test
+~/java-test$ docker run --rm -v "$PWD":/thanh -w /thanh openjdk javac hello.java
+~/java-test$ docker run --rm -v "$PWD":/thanh -w /thanh openjdk java hello.java
+
+
+#Ubuntu cơ bản:
+Check ubuntu version:
+lsb_release -a
+sudo shutdown -h now
+sudo reboot
+mkdir <name> : Create directory.
+cd ..  : Go to parent folder.
+cd -   : Back	
+
+
+
+
+###Install maven:
+sudo apt update
+sudo apt install maven
+mvn -version
+###Install chrome: 
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+google-chrome --version
+
+###chmod driver:
+chmod +x chromedriver
+
+###Run project:
+non-docker: sudo mvn clean install
+docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.3-jdk-8 mvn clean install
+docker run -it --name automation-web -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.3-jdk-8 mvn clean install
+
+
+##SELENIUM GRID:
+
+docker-compose -f node.yml up
+
+docker-compose up -d (if just has only one .yml file)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###Hub:
++ download:
+wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+java -jar selenium-server-standalone-<version>.jar -role hub -hubConfig hubConfig.json
+java -jar [selenium-server-standalone-3.141.59.jar] -role hub
+check: http://172.16.0.8:4444/
+
++ (optional)Copy to bin to run when start up: 
+sudo mv selenium-server-standalone-3.141.59.jar /usr/bin/local/
+
+###Node:
+java -jar [selenium-server-standalone-3.141.59.jar] -role node -nodeConfig config.json
+java -jar server.jar -role node -nodeConfig config.json
+
+#Jenkin:
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt-get install jenkins
+sudo service jenkins start
+access: http://172.16.0.8:8080/
+sudo chmod a+rwx ./secrets : Grand Accesss right to read password folder, password file.
+sudo chmod a+rwx initialAdminPassword : 
+
+
+#GIT COMMAND:
+git clone https://vanthanhle@bitbucket.org/vmodev/automation_team.git
+Pass: vmo@12345
+https://viblo.asia/p/nhung-lenh-git-co-ban-can-nho-V3m5W1OyZO7
+
+
+
+
+Todo:
+guide:
++ install docker.
++ run selenium grid.
++ explain command
++ 1 node bao nhieu cpu, ram?
++ Guide vnc: docker-compose up -d (debug)
+
+
+================================================================================================================================
+
+UBUNTU 20
+
+---
+
+Cài docker on ubuntu 20
+
+sudo apt-get install -y curl  apt-transport-https ca-certificates software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add 
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+
+# https://stackoverflow.com/questions/61401626/docker-installation-failed-on-ubuntu-20-04-ltsvmware
+sudo apt-get install -y docker.io
+
+sudo usermod -aG docker ${USER}
+su - ${USER}
+id -nG
+sudo usermod -aG docker ${USER}
+
+---
+
+Configure Docker to start on boot
+https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot
+
+sudo systemctl enable docker
+
+
+----
+
+log out
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+----
+
+setup ko gõ pass với lệnh sudo
+https://askubuntu.com/questions/147241/execute-sudo-without-password
+$ sudo visudo
+
+thêm dòng vào cuối (với ubuntu 19)
+ubuntu ALL=(ALL) NOPASSWD: ALL
+
+logout và login lại để có hiệu lực

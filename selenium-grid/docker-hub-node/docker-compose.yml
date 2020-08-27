@@ -1,0 +1,60 @@
+version: "3"
+services:
+  tri_selenium_hub:
+    image: selenium/hub:3.141.59
+    container_name: tri_selenium_hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+        
+  chrome:
+    image: selenium/node-chrome:3.141.59
+    container_name: tri_node_chrome
+    depends_on:
+      - tri_selenium_hub
+    #volumes:
+    #  - /dev/shm:/dev/shm
+    environment:
+      - SE_EVENT_BUS_HOST=tri_selenium_hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - HUB_PORT_4444_TCP_ADDR=tri_selenium_hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    #ports:
+    #  - "5900:5900"
+    #  - "5555:5555"
+  
+  firefox:
+    image: selenium/node-firefox:3.141.59
+    container_name: tri_node_firefox
+    depends_on:
+      - tri_selenium_hub
+    #volumes:
+    #  - /dev/shm:/dev/shm
+    environment:
+      - SE_EVENT_BUS_HOST=tri_selenium_hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - HUB_PORT_4444_TCP_ADDR=tri_selenium_hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    #ports:
+    #  - "5900:5900"
+    #  - "5555:5555"
+  
+  opera:
+    image: selenium/node-opera:3.141.59
+    container_name: tri_node_opera
+    depends_on:
+      - tri_selenium_hub
+    #volumes:
+    #  - /dev/shm:/dev/shm
+    environment:
+      - SE_EVENT_BUS_HOST=tri_selenium_hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - HUB_PORT_4444_TCP_ADDR=tri_selenium_hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    #ports:
+    #  - "5900:5900"
+    #  - "5555:5555"
