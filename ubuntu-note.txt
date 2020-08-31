@@ -29,7 +29,14 @@ sudo reboot
 mkdir <name> : Create directory.
 cd ..  : Go to parent folder.
 cd -   : Back	
+rm -rf [folder-name]
 
+
+Docker-compose:
+docker-compose up -d
+
+docker container stop [container - name]
+docker container rm [container - name]
 
 
 
@@ -114,6 +121,7 @@ guide:
 + explain command
 + 1 node bao nhieu cpu, ram?
 + Guide vnc: docker-compose up -d (debug)
++ Using git SSH: guid
 
 
 ================================================================================================================================

@@ -9,8 +9,10 @@ public class Const {
 		public static String CHROME_PATH = "src/test/resources/driver/chromedriver.exe";
 		public static String FIREFOX_PATH = "src/test/resources/driver/geckodriver.exe";
 		public static String PATH = "https://simon-wbo.btn.vmo.group/";
+		public static String GRID_HUB = "http://172.16.0.8:4444/wd/hub";
 		public static Browser browser = Browser.CHROME;
-		public static boolean HEADLESS = true;
+		public static boolean HEADLESS = false;
+		public static boolean GRID = true;
 	}
 	
 	public static class Expectations{
